@@ -1,6 +1,4 @@
-import React from "react";
-import Background from "../components/homeRelated/Background";
-import Form from "../components/homeRelated/Form";
+import { Form, Background } from "../components/homeRelated/index";
 
 export default function Home() {
   return (
