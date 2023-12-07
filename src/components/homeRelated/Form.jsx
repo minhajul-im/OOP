@@ -7,7 +7,7 @@ import {
   formFunction,
   userSignUpSignIn,
 } from "../../utilities/homeFunction/index";
-import { Input, Button, GoogleAndGithub } from "./index";
+import { Input, Button } from "./index";
 
 export default function Form() {
   const inputName = useRef(null);
@@ -64,8 +64,6 @@ export default function Form() {
         {error && <p className="text-red-600 font-semibold text-xs">{error}</p>}
 
         <Button btnName={isSignIn ? "Sign in" : "Sign up"} />
-
-        <GoogleAndGithub />
 
         <p className="pt-2 text-white">
           You have {isSignIn ? "no" : "already"} account!
