@@ -1,7 +1,5 @@
-import Input from "./Input";
-import Button from "./Button";
+import { Input, Button, GoogleAndGithub } from "./index";
 import formFunction from "../../utilities/homeFunction/formFunction";
-import GoogleAndGithub from "./GoogleAndGithub";
 
 export default function Form() {
   const { isSignIn, error, setError, handleToggle } = formFunction();
@@ -21,7 +19,7 @@ export default function Form() {
 
         {error && <p className="text-red-600 font-semibold text-xs">{error}</p>}
 
-        <Button name={isSignIn ? "Sign in" : "Sign up"} />
+        <Button btnName={isSignIn ? "Sign in" : "Sign up"} />
 
         <GoogleAndGithub />
 
