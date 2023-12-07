@@ -1,12 +1,13 @@
 import { useRef } from "react";
 
-import { Input, Button, GoogleAndGithub } from "./index";
 import {
   isName,
   isEmail,
   isPassword,
   formFunction,
+  userSignUpSignIn,
 } from "../../utilities/homeFunction/index";
+import { Input, Button, GoogleAndGithub } from "./index";
 
 export default function Form() {
   const inputName = useRef(null);
@@ -21,13 +22,15 @@ export default function Form() {
       const nameMgs = isName(inputName.current.value);
       if (nameMgs) return setError(nameMgs);
     }
-    const emailMgs = isEmail(inputEmail.current.value);
-    const passwordMgs = isPassword(inputPassword.current.value);
 
+    let emailVal = inputEmail.current.value;
+    let passwordVal = inputPassword.current.value;
+    const emailMgs = isEmail(emailVal);
+    const passwordMgs = isPassword(passwordVal);
     if (emailMgs) return setError(emailMgs);
     if (passwordMgs) return setError(passwordMgs);
 
-    console.log(emailMgs, passwordMgs);
+    userSignUpSignIn(isSignIn, emailVal, passwordVal, setError);
   };
 
   return (
