@@ -6,7 +6,7 @@ export default function Form() {
 
   return (
     <form className="w-3/12 rounded py-8 px-6 bg-gray-800/70">
-      <h1 className="text-3xl font-bold  py-10 text-center text-white">
+      <h1 className="text-3xl font-bold pt-4  pb-10 text-center text-white">
         {isSignIn ? "Sign in" : "Sign up"}
       </h1>
       <div className="flex flex-col gap-4">
@@ -23,7 +23,7 @@ export default function Form() {
 
         <GoogleAndGithub />
 
-        <p className="pt-8 text-white">
+        <p className="pt-2 text-white">
           You have {isSignIn ? "no" : "already"} account!
           <span
             onClick={handleToggle}

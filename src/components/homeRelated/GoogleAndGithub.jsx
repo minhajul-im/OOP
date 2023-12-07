@@ -13,7 +13,7 @@ export default function GoogleAndGithub() {
         icon={faGithub}
         className="text-2xl mx-2 cursor-pointer"
       />
-      <p>You can sign in Google & Github!</p>
+      <p>You can sign in or sign up Google & Github!</p>
     </div>
   );
 }
