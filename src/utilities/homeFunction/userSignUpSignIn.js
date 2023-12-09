@@ -2,15 +2,25 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import { useDispatch } from "react-redux";
 
-const userSignUpSignIn = (isSignIn, emailVal, passwordVal, setError) => {
+import { auth } from "../firebase/firebase";
+import { addUser } from "../../features/createUserSlice";
+
+const userSignUpSignIn = ({
+  isSignIn,
+  nameVal,
+  emailVal,
+  passwordVal,
+  setError,
+}) => {
+  const dispatch = useDispatch();
   if (!isSignIn) {
     createUserWithEmailAndPassword(auth, emailVal, passwordVal)
       .then((userCredential) => {
         const user = userCredential.user;
-
         console.log(user);
+        dispatch(addUser({ displayName: nameVal, email: emailVal }));
       })
       .catch((error) => {
         const errorCode = error.code;

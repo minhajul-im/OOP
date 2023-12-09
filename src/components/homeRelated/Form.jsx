@@ -30,7 +30,13 @@ export default function Form() {
     if (emailMgs) return setError(emailMgs);
     if (passwordMgs) return setError(passwordMgs);
 
-    userSignUpSignIn(isSignIn, emailVal, passwordVal, setError);
+    userSignUpSignIn({
+      isSignIn,
+      nameVal: inputName.current.value,
+      emailVal,
+      passwordVal,
+      setError,
+    });
   };
 
   return (
