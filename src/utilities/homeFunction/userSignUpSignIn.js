@@ -2,6 +2,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { auth } from "../firebase/firebase";
@@ -14,13 +15,15 @@ const userSignUpSignIn = ({
   passwordVal,
   setError,
 }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const navigate = useNavigate();
   if (!isSignIn) {
     createUserWithEmailAndPassword(auth, emailVal, passwordVal)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        dispatch(addUser({ displayName: nameVal, email: emailVal }));
+        navigate("/browse");
+        // dispatch(addUser({ displayName: nameVal, email: emailVal }));
       })
       .catch((error) => {
         const errorCode = error.code;

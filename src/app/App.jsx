@@ -2,7 +2,7 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, Outlet } from "react-router-dom";
 
 import store from "./store";
-import { Browse, Home } from "../pages/index";
+import { Browse, Home, Error } from "../pages/index";
 import Header from "../components/header&footer/Header";
 
 const App = () => {
@@ -28,6 +28,7 @@ const appRouter = createBrowserRouter([
         element: <Browse />,
       },
     ],
+    errorElement: <Error />,
   },
 ]);
 

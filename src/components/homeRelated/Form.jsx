@@ -1,15 +1,24 @@
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import {
   isName,
   isEmail,
   isPassword,
   formFunction,
-  userSignUpSignIn,
 } from "../../utilities/homeFunction/index";
 import { Input, Button } from "./index";
+import { addUser } from "../../features/createUserSlice";
+import { auth } from "../../utilities/firebase/firebase";
 
 export default function Form() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const inputName = useRef(null);
   const inputEmail = useRef(null);
   const inputPassword = useRef(null);
@@ -25,18 +34,44 @@ export default function Form() {
 
     let emailVal = inputEmail.current.value;
     let passwordVal = inputPassword.current.value;
+
     const emailMgs = isEmail(emailVal);
     const passwordMgs = isPassword(passwordVal);
+
     if (emailMgs) return setError(emailMgs);
     if (passwordMgs) return setError(passwordMgs);
 
-    userSignUpSignIn({
-      isSignIn,
-      nameVal: inputName.current.value,
-      emailVal,
-      passwordVal,
-      setError,
-    });
+    if (!isSignIn) {
+      createUserWithEmailAndPassword(auth, emailVal, passwordVal)
+        .then((userCredential) => {
+          userCredential.user;
+
+          dispatch(
+            addUser({ displayName: inputName.current.value, email: emailVal })
+          );
+
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          setError(`${errorCode} &&& ${errorMessage}`);
+        });
+    } else {
+      signInWithEmailAndPassword(auth, emailVal, passwordVal)
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          setError(`${errorCode} &&& ${errorMessage}`);
+        });
+    }
   };
 
   return (
