@@ -34,9 +34,7 @@ const userSignUpSignIn = ({
   } else {
     signInWithEmailAndPassword(auth, emailVal, passwordVal)
       .then((userCredential) => {
-        const user = userCredential.user;
-
-        console.log(user);
+        userCredential.user;
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -46,5 +44,3 @@ const userSignUpSignIn = ({
       });
   }
 };
-
-export default userSignUpSignIn;

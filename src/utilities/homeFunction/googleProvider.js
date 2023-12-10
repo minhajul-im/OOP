@@ -7,17 +7,11 @@ export default function googleProvider() {
   signInWithPopup(auth, provider)
     .then((result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-
-      const user = result.user;
-
-      console.log(token);
-      console.log(user);
+      credential.accessToken;
+      result.user;
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-
-      console.log(errorCode, errorMessage);
     });
 }

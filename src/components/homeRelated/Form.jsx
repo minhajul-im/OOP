@@ -61,9 +61,7 @@ export default function Form() {
     } else {
       signInWithEmailAndPassword(auth, emailVal, passwordVal)
         .then((userCredential) => {
-          const user = userCredential.user;
-
-          console.log(user);
+          userCredential.user;
         })
         .catch((error) => {
           const errorCode = error.code;

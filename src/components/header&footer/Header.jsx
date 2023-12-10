@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 
 import { auth } from "../../utilities/firebase/firebase";
 import { addUser, removeUser } from "../../features/createUserSlice";
+import MovieHeader from "./MovieHeader";
 
 export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -22,5 +24,6 @@ export default function Header() {
       }
     });
   }, []);
-  return <div className="hidden">.</div>;
+
+  return <div className="">{pathname === "/movies" && <MovieHeader />}</div>;
 }
