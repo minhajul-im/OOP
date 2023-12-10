@@ -15,7 +15,7 @@ export default function Header() {
       if (user) {
         const { uid, email, displayName } = user;
         dispatch(addUser({ uid, email, displayName }));
-        navigate("/browse");
+        navigate("/movies");
       } else {
         dispatch(removeUser());
         navigate("/");

@@ -50,7 +50,7 @@ export default function Form() {
             addUser({ displayName: inputName.current.value, email: emailVal })
           );
 
-          navigate("/browse");
+          navigate("/movies");
         })
         .catch((error) => {
           const errorCode = error.code;
