@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate, useLocation } from "react-router-dom";
 
+import MovieNavbar from "./MovieNavbar";
 import { auth } from "../../utilities/firebase/firebase";
 import { addUser, removeUser } from "../../features/createUserSlice";
-import MovieHeader from "./MovieHeader";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -25,5 +25,5 @@ export default function Header() {
     });
   }, []);
 
-  return <div className="">{pathname === "/movies" && <MovieHeader />}</div>;
+  return <div className="">{pathname === "/movies" && <MovieNavbar />}</div>;
 }

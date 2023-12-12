@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { auth } from "../../utilities/firebase/firebase";
 import { MOVIE_LOGO } from "../../utilities/constant/moveRelated";
 
-export default function MovieHeader() {
+export default function MovieNavbar() {
   const navigate = useNavigate();
 
   const handleSignOut = () => {
