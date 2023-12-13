@@ -1,23 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { POPULAR_MOVIES, options } from "../../config";
+
+import TMDB_API from "../utilities/constant/movieServices";
 
 export const fetchMoviesApi = createAsyncThunk(
   "movies/fetchMoviesApi",
   async () => {
-    const response = await fetch(POPULAR_MOVIES, options);
+    const response = await fetch(TMDB_API.popular);
     return await response.json();
   }
 );
+
 const initialState = {
-  isLoading: false,
   movies: null,
   isError: false,
+  isLoading: false,
 };
 
 const createMoviesSlice = createSlice({
   name: "movies",
   initialState,
-  reducers: {},
+
   extraReducers: (builder) =>
     builder
       .addCase(fetchMoviesApi.pending, (state) => {

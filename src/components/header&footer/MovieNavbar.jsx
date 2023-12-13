@@ -4,7 +4,6 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { auth } from "../../utilities/firebase/firebase";
-import { MOVIE_LOGO } from "../../utilities/constant/moveRelated";
 
 export default function MovieNavbar() {
   const navigate = useNavigate();
@@ -18,10 +17,10 @@ export default function MovieNavbar() {
         navigate("/error");
       });
   };
+
   return (
-    <header className="bg-teal-500">
-      <nav className="w-9/12 mx-auto flex justify-between items-center">
-        <img className="w-10 h-10 rounded-full" src={MOVIE_LOGO} alt="log" />
+    <header className="bg-teal-500 absolute w-full">
+      <nav className="w-9/12 mx-auto flex justify-between items-center ">
         <ul>
           <FontAwesomeIcon
             onClick={handleSignOut}
