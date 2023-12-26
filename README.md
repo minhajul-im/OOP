@@ -1,1 +1,1 @@
-# Netflix type project!
+# Blog Magazine
