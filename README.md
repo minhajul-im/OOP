@@ -1,1 +1,1 @@
-# Blog Magazine
+### Blog Magazine
