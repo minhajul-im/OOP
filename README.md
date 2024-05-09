@@ -1,1 +1,2 @@
 # Blog Magazine
+## setup project
