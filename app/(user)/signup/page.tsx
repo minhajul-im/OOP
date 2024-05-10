@@ -39,7 +39,7 @@ const SignInPage = () => {
           reset();
           router.push("/signin");
           console.log(data);
-        }, 2000)
+        }, 3000)
       );
     } catch (err: any) {
       setError("email", {
@@ -58,21 +58,21 @@ const SignInPage = () => {
         className='w-full sm:w-[600px]'>
         <FieldSet error={errors.name?.message} label='Full Name'>
           <Input
-            isIcon={false}
             type={true}
+            isIcon={false}
             error={!!errors.name}
             register={register("name")}
-            placeholder='Please Give Your Full Name!'
+            placeholder='Please Give Your Full Name...'
           />
         </FieldSet>
 
         <FieldSet error={errors.email?.message} label='Your Email'>
           <Input
-            isIcon={false}
             type={true}
+            isIcon={false}
             error={!!errors.email}
             register={register("email")}
-            placeholder='@ Please Give Your Email!'
+            placeholder='@ Please Give Your Email...'
           />
         </FieldSet>
 
@@ -84,7 +84,7 @@ const SignInPage = () => {
             register={register("password")}
             onToggle={togglePasswordVisibility}
             isVisible={passwordVisibility.visible}
-            placeholder='Please Give Your Password!'
+            placeholder='Please Give Your Password...'
           />
         </FieldSet>
 
@@ -98,7 +98,7 @@ const SignInPage = () => {
             register={register("confirmPassword")}
             onToggle={toggleConfirmPasswordVisibility}
             isVisible={confirmPasswordVisibility.visible}
-            placeholder='Please Give Your Confirm Password!'
+            placeholder='Please Give Your Confirm Password...'
           />
         </FieldSet>
 
@@ -107,7 +107,7 @@ const SignInPage = () => {
         </Button>
       </form>
 
-      <h6 className='text-start mt-2'>
+      <h6 className='mt-2'>
         You have already an account?
         <span className='text-blue-600 font-semibold ms-2'>
           <Link href='/signin' className='underline'>
