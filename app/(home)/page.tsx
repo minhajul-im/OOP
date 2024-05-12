@@ -1,8 +1,7 @@
+import BACKGROUND from "@/svg/BACKGROUND";
 
 const HomePage = () => {
-  return (
-    <div>HomePage</div>
-  )
-}
+  return <BACKGROUND />;
+};
 
-export default HomePage
+export default HomePage;

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import Input from "@/components/auth/Input";
 import Button from "@/components/auth/Button";
 import { SignUpUserData } from "@/interface/auth";
@@ -33,7 +32,7 @@ const SignInPage = () => {
 
   const onSubmitForm = async (data: SignUpUserData) => {
     try {
-     await new Promise((resolve: any) =>
+      await new Promise((resolve: any) =>
         setTimeout(() => {
           resolve();
           reset();
@@ -103,7 +102,7 @@ const SignInPage = () => {
         </FieldSet>
 
         <Button type='submit' isSubmit={isSubmitting}>
-          {isSubmitting ? <Spinner/> : "Sign up"}
+          {isSubmitting ? <Spinner /> : "Sign up"}
         </Button>
       </form>
 
@@ -120,5 +119,3 @@ const SignInPage = () => {
 };
 
 export default SignInPage;
-
-
