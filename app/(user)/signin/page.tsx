@@ -3,13 +3,11 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-
 import Input from "@/components/auth/Input";
 import Button from "@/components/auth/Button";
 import FieldSet from "@/components/auth/FieldSet";
 import { SignInUserData } from "@/interface/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Spinner from "@/components/common/Spinner";
 import { tsSignInSchema, SignInSchema } from "@/lib/authSchema";
 import { usePasswordVisibilityToggle } from "@/hooks/useVisible";
@@ -52,7 +50,7 @@ const SignInPage = () => {
   };
 
   return (
-    <section className='mx-4 flex flex-col justify-center items-center h-screen'>
+    <section className='px-4 flex flex-col justify-center items-center h-screen'>
       <h1 className='text-4xl font-bold mb-6'>Sign in</h1>
 
       <form
