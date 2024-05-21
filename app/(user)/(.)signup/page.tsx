@@ -12,7 +12,7 @@ import { tsSignUpSchema, SignUpSchema } from "@/lib/authSchema";
 import { usePasswordVisibilityToggle } from "@/hooks/useVisible";
 import Spinner from "@/components/common/Spinner";
 
-const SignInPage = () => {
+const SignInInterceptingPage = () => {
   const router = useRouter();
 
   const {
@@ -49,12 +49,12 @@ const SignInPage = () => {
   };
 
   return (
-    <section className='px-4 flex flex-col justify-center items-center h-screen'>
+    <section className='px-4 flex flex-col justify-center items-center h-screen bg-teal-100'>
       <h1 className='text-4xl font-bold mb-6'>Create an account</h1>
 
       <form
         onSubmit={handleSubmit(onSubmitForm)}
-        className='w-full sm:w-[600px]'>
+        className='w-full sm:w-[400px]'>
         <FieldSet error={errors.name?.message} label='Full Name'>
           <Input
             type={true}
@@ -118,4 +118,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignInInterceptingPage;
