@@ -1,98 +1,132 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import * as z from "zod";
 import { useForm } from "react-hook-form";
-import Input from "@/components/auth/Input";
-import Button from "@/components/auth/Button";
-import FieldSet from "@/components/auth/FieldSet";
-import { SignInUserData } from "@/interface/auth";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Spinner from "@/components/common/Spinner";
-import { tsSignInSchema, SignInSchema } from "@/utilities/authSchema";
-import { usePasswordVisibilityToggle } from "@/hooks/useVisible";
+import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 
-const SignInInterceptingPage = () => {
-  const router = useRouter();
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6, "Must six characters"),
+});
 
+type formSchemaType = z.infer<typeof formSchema>;
+
+const SignInPage = () => {
+  const [isShow, setIsShow] = React.useState<"SHOW" | "HIDE">("HIDE");
+  const form = useForm<formSchemaType>({ resolver: zodResolver(formSchema) });
   const {
-    reset,
-    register,
-    setError,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
-  } = useForm<tsSignInSchema>({ resolver: zodResolver(SignInSchema) });
+  } = form;
 
-  const { passwordVisibility, togglePasswordVisibility } =
-    usePasswordVisibilityToggle();
+  const onSubmitted = async (formData: any) => {
+    await new Promise((resolve: any) =>
+      setTimeout(() => {
+        resolve();
+        console.log("values", formData);
+      }, 2000)
+    );
+  };
 
-  const onSubmitForm = async (data: SignInUserData) => {
-    try {
-      await new Promise((resolve: any) =>
-        setTimeout(() => {
-          resolve();
-          reset();
-          router.push("/");
-          console.log("SIGN IN:- ", data);
-        }, 3000)
-      );
-    } catch (err: any) {
-      setError("email", {
-        type: "server",
-        message: "Email is Wrong!",
-      });
-      setError("password", {
-        type: "server",
-        message: "Password is Wrong!",
-      });
-      console.log("LOGIN ERROR", err);
+  const handleShow = () => {
+    if (isShow === "HIDE") {
+      setIsShow("SHOW");
+    } else {
+      setIsShow("HIDE");
     }
   };
 
   return (
-    <section className="px-4 flex flex-col justify-center items-center h-screen">
-      <h1 className="text-4xl font-bold mb-6">Sign in</h1>
-
-      <form
-        onSubmit={handleSubmit(onSubmitForm)}
-        className="w-full sm:w-[400px]">
-        <FieldSet error={errors.email?.message} label="Your Email">
-          <Input
-            type={true}
-            isIcon={false}
-            error={!!errors.email}
-            register={register("email")}
-            placeholder="@ Please Give Your Email..."
-          />
-        </FieldSet>
-
-        <FieldSet error={errors.password?.message} label="Your Password">
-          <Input
-            isIcon={true}
-            error={!!errors.password}
-            type={passwordVisibility.type}
-            register={register("password")}
-            onToggle={togglePasswordVisibility}
-            isVisible={passwordVisibility.visible}
-            placeholder="Please Give Your Password..."
-          />
-        </FieldSet>
-
-        <Button type="submit" isSubmit={isSubmitting}>
-          {isSubmitting ? <Spinner /> : "Sign in"}
-        </Button>
-      </form>
-
-      <h6 className="mt-2">
-        You have already an account?
-        <span className="text-blue-600 font-semibold ms-2">
-          <Link href="/signup" className="underline">
-            Sign up
-          </Link>
-        </span>
-      </h6>
-    </section>
+    <main className="flex justify-center items-center h-screen bg-black">
+      <Card className="w-[400px]">
+        <CardHeader>
+          <CardTitle>Sign in</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={handleSubmit(onSubmitted)}>
+              <FormField
+                control={control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="email"
+                        placeholder="Enter your email address..."
+                      />
+                    </FormControl>
+                    <FormMessage className="tex-sx">
+                      {errors.email?.message}
+                    </FormMessage>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        icon={isShow === "SHOW" ? <IoMdEyeOff /> : <IoMdEye />}
+                        onShow={handleShow}
+                        type={isShow === "SHOW" ? "text" : "password"}
+                        placeholder="Enter Your Password..."
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className="tex-sx">
+                      {errors.password?.message}
+                    </FormMessage>
+                  </FormItem>
+                )}
+              />
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full mt-4">
+                {isSubmitting ? (
+                  <>
+                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  "Submit"
+                )}
+              </Button>
+            </form>
+          </Form>
+          <h6 className="mt-6 text-xs text-right select-none">
+            You have no account?
+            <span className="text-blue-600 font-semibold ms-2">
+              <Link href="/signup" className="underline">
+                Sign up
+              </Link>
+            </span>
+          </h6>
+        </CardContent>
+      </Card>
+    </main>
   );
 };
-
-export default SignInInterceptingPage;
+export default SignInPage;
