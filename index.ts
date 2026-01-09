@@ -1,1 +1,1 @@
-console.log("practice OOP");
+console.log("hello there");
